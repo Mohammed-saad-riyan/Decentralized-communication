@@ -221,9 +221,18 @@ npm run deploy
 - **Innovation**: Cutting-edge Web3 features
 - **Community Ownership**: DAO governance
 
-## 📞 Support & Community
+## Try Out The Demo
+- [Visit the Website](https://voicevault-xi.vercel.app)
+- Connect your wallet (DevNet)
+- Create a New Channel
+- Send the Channel ID to another peer
+- Join the channel with the same Channel ID
+- you can now communicate, no central control, total privacy
 
-- **Twitter**: [@VoiceVaultApp](https://x.com/M_saadriyan)
+  
+## 📞 Support & Follow
+
+- **Twitter**: [@Saad Riyan](https://x.com/M_saadriyan)
 - **GitHub**: [Issues & Discussions](https://github.com/Mohammed-saad-riyan/Decentralized-communication)
 
 
