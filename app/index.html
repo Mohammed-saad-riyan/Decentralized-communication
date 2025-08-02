@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VoiceVault - Secure Voice Chat</title>
+    <style>
+      #loading-indicator {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #f0f0f0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      }
+      .progress {
+        width: 300px;
+        height: 10px;
+        background: #ccc;
+        border-radius: 10px;
+        margin: 20px 0;
+        overflow: hidden;
+      }
+      .progress-bar {
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(90deg, #4f46e5, #8b5cf6);
+        transition: width 0.5s;
+      }
+      #debug-info {
+        margin-top: 10px;
+        padding: 10px;
+        width: 80%;
+        max-width: 500px;
+        background: #e0e0e0;
+        border-radius: 5px;
+        font-size: 12px;
+        height: 100px;
+        overflow: auto;
+        text-align: left;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="loading-indicator">
+      <h2>Loading DecentraVoice...</h2>
+      <div class="progress">
+        <div class="progress-bar" id="progress-bar"></div>
+      </div>
+      <div id="debug-info"></div>
+    </div>
+    
+    <div id="root"></div>
+    
+    <!-- Dedicated container for WebRTC audio elements -->
+    <div id="webrtc-audio-container" style="display: none;" aria-hidden="true"></div>
+    
+    <script>
+      // Debug loading process
+      const debugInfo = document.getElementById('debug-info');
+      const progressBar = document.getElementById('progress-bar');
+      const loadingIndicator = document.getElementById('loading-indicator');
+      
+      function log(message) {
+        if (debugInfo) {
+          debugInfo.innerHTML += message + '<br>';
+          debugInfo.scrollTop = debugInfo.scrollHeight;
+        }
+        console.log(message);
+      }
+      
+      function updateProgress(percent) {
+        if (progressBar) {
+          progressBar.style.width = percent + '%';
+        }
+      }
+      
+      // Log initial load
+      log('Page loaded at: ' + new Date().toLocaleTimeString());
+      updateProgress(10);
+      
+      window.addEventListener('DOMContentLoaded', () => {
+        log('DOM content loaded');
+        updateProgress(30);
+      });
+      
+      setTimeout(() => {
+        updateProgress(50);
+        log('Checking if app is initializing...');
+      }, 1000);
+      
+      setTimeout(() => {
+        const rootEl = document.getElementById('root');
+        if (rootEl && rootEl.children.length > 0) {
+          log('App started rendering!');
+          updateProgress(100);
+          setTimeout(() => {
+            loadingIndicator.style.display = 'none';
+          }, 500);
+        } else {
+          updateProgress(70);
+          log('App not rendering yet. Check console for errors.');
+        }
+      }, 3000);
+      
+      window.onerror = function(message, source, lineno, colno, error) {
+        log(`Error: ${message} (${source}:${lineno}:${colno})`);
+      };
+    </script>
+    
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html> 
