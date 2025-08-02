@@ -1,0 +1,222 @@
+{
+  "address": "8kNH8KYr2c6karBWHUcSos3qWyWC4eWQ91Pr7M9onsdh",
+  "metadata": {
+    "name": "decentra_voice_mvp",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "Created with Anchor"
+  },
+  "instructions": [
+    {
+      "name": "create_channel",
+      "discriminator": [
+        37,
+        105,
+        253,
+        99,
+        87,
+        46,
+        223,
+        20
+      ],
+      "accounts": [
+        {
+          "name": "channel",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "user",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "name",
+          "type": "string"
+        }
+      ],
+      "returns": "string"
+    },
+    {
+      "name": "get_channel_info",
+      "discriminator": [
+        70,
+        186,
+        197,
+        36,
+        199,
+        119,
+        118,
+        115
+      ],
+      "accounts": [
+        {
+          "name": "channel"
+        }
+      ],
+      "args": [],
+      "returns": {
+        "defined": {
+          "name": "ChannelInfo"
+        }
+      }
+    },
+    {
+      "name": "join_channel",
+      "discriminator": [
+        124,
+        39,
+        115,
+        89,
+        217,
+        26,
+        38,
+        29
+      ],
+      "accounts": [
+        {
+          "name": "channel",
+          "writable": true
+        },
+        {
+          "name": "user",
+          "signer": true
+        }
+      ],
+      "args": [],
+      "returns": {
+        "defined": {
+          "name": "ChannelInfo"
+        }
+      }
+    },
+    {
+      "name": "leave_channel",
+      "discriminator": [
+        104,
+        0,
+        75,
+        134,
+        95,
+        80,
+        68,
+        186
+      ],
+      "accounts": [
+        {
+          "name": "channel",
+          "writable": true
+        },
+        {
+          "name": "user",
+          "signer": true
+        }
+      ],
+      "args": []
+    }
+  ],
+  "accounts": [
+    {
+      "name": "Channel",
+      "discriminator": [
+        49,
+        159,
+        99,
+        106,
+        220,
+        87,
+        219,
+        88
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "ChannelInactive",
+      "msg": "Channel is not active"
+    },
+    {
+      "code": 6001,
+      "name": "ChannelFull",
+      "msg": "Channel is full"
+    },
+    {
+      "code": 6002,
+      "name": "Unauthorized",
+      "msg": "Unauthorized access"
+    }
+  ],
+  "types": [
+    {
+      "name": "Channel",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "id",
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "creator",
+            "type": "pubkey"
+          },
+          {
+            "name": "created_at",
+            "type": "i64"
+          },
+          {
+            "name": "active",
+            "type": "bool"
+          },
+          {
+            "name": "participant_count",
+            "type": "u32"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ChannelInfo",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "id",
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "creator",
+            "type": "pubkey"
+          },
+          {
+            "name": "created_at",
+            "type": "i64"
+          },
+          {
+            "name": "participant_count",
+            "type": "u32"
+          },
+          {
+            "name": "active",
+            "type": "bool"
+          }
+        ]
+      }
+    }
+  ]
+}
